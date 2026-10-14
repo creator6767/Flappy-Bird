@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1030">
+  <title>Flappy Bird</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%A4%3C/text%3E%3C/svg%3E">
+
+  <!-- Шрифт подгружается, если есть интернет. Без него игра использует системный округлый шрифт. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="stage" id="stage" data-mode="ready">
+    <canvas id="game" role="img" aria-label="Игровое поле: птичка летит между труб"></canvas>
+
+    <div class="toolbar">
+      <button class="icon-btn" id="pauseBtn" type="button" data-state="playing"
+              aria-label="Пауза" title="Пауза (P)">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g class="i-pause">
+            <rect x="6" y="5" width="4" height="14" rx="1.5"/>
+            <rect x="14" y="5" width="4" height="14" rx="1.5"/>
+          </g>
+          <path class="i-play" d="M8 5.5v13l11-6.5z"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="muteBtn" type="button" data-state="on"
+              aria-label="Выключить звук" aria-pressed="false" title="Звук (M)">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z"/>
+          <g class="i-on" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M15.5 9a4 4 0 0 1 0 6"/>
+            <path d="M18 6.5a8 8 0 0 1 0 11"/>
+          </g>
+          <g class="i-off" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M16 9.5l5 5M21 9.5l-5 5"/>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Стартовый экран -->
+    <section class="panel intro" id="intro">
+      <h1 class="logo"><span>Flappy</span><span>Bird</span></h1>
+      <p class="hint">Нажми, чтобы взлететь</p>
+      <p class="keys">Пробел, клик или касание</p>
+      <p class="intro-best" id="introBest" hidden>Рекорд: <b id="introBestVal">0</b></p>
+    </section>
+
+    <!-- Конец игры -->
+    <section class="panel over" id="over" role="dialog" aria-labelledby="overTitle" hidden>
+      <h2 id="overTitle">Игра окончена</h2>
+      <div class="card">
+        <div class="medal" id="medal" data-tier="none" aria-hidden="true"></div>
+        <dl class="scores">
+          <div>
+            <dt>Счёт</dt>
+            <dd id="finalScore">0</dd>
+          </div>
+          <div>
+            <dt>Рекорд</dt>
+            <dd id="bestScore">0</dd>
+          </div>
+        </dl>
+        <p class="badge-new" id="newBadge" hidden>Новый рекорд!</p>
+      </div>
+      <button class="btn" id="retryBtn" type="button">Играть снова</button>
+    </section>
+
+    <!-- Пауза -->
+    <div class="paused" id="paused" hidden>
+      <p class="paused-title">Пауза</p>
+      <p class="paused-sub">Нажми, чтобы продолжить</p>
+    </div>
+
+    <div class="flash" id="flash" aria-hidden="true"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
